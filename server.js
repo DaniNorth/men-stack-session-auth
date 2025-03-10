@@ -6,6 +6,8 @@ const mongoose = require( "mongoose" );
 const methodOverride = require( "method-override" );
 const morgan = require( "morgan" );
 const authController = require('./controllers/auth');
+const session = require('express-session');
+
 
 // const port = process.env.PORT ? process.env.PORT: (this is a terniary function that )
 const port = process.env.PORT || "3000";
@@ -20,13 +22,23 @@ mongoose.connection.on("connected", () => {
 app.use(express.urlencoded({ extended: false }));
 //Middleware for using HTTPverbs such as PUT or DELETE
 app.use (methodOverride("_method"));
+
 app.use(morgan('dev'));
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+}));
 
 app.use('/auth', authController);
 
 
 app.get('/', async (req, res) => {
-    res.render('index.ejs')
+    res.render('index.ejs', {
+        user: req.session.user
+    })
 });
 
 //tell the app to listen for HTTP Requests
