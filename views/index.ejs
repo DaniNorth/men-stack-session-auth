@@ -8,6 +8,9 @@
 <body>
     <% if (user) { %>
         <h1> Welcome to the app, <%= user.username %> </h1>
+        <p>
+            <a href="/auth/sign-out">Sign out</a>
+        </p>
     <% } else { %>
         <h1> Welcome to the App!</h1>
         <nav>
@@ -17,6 +20,9 @@
                 </li>
                 <li>
                     <a href="/auth/sign-in">Sign in</a>
+                </li>
+                <li>
+                    <p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
                 </li>
             </ul>    
         </nav>

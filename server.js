@@ -34,12 +34,20 @@ app.use(
 
 app.use('/auth', authController);
 
-
 app.get('/', async (req, res) => {
     res.render('index.ejs', {
         user: req.session.user
     })
 });
+
+app.get("/vip-lounge", (req, res) => {
+    if (req.session.user) {
+      res.send(`Welcome to the party ${req.session.user.username}.`);
+    } else {
+      res.send("Sorry, no guests allowed.");
+    }
+  });
+  
 
 //tell the app to listen for HTTP Requests
 app.listen(port, () => {
