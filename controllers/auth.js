@@ -5,9 +5,6 @@ const bcrypt = require("bcrypt");
 
 
 
-router.get('/sign-up', (req, res) => {
-    res.render('auth/sign-up.ejs');
-});
 
 router.post('/sign-up', async (req,res)=> {
     // check if the user exsits - NO DUPLICATE USERNAMES
